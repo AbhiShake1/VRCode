@@ -3,7 +3,7 @@ from typing import Optional
 import cv2
 
 
-class VideoCapture:
+class _VideoCapture:
     _img: object
 
     def __init__(self, frame_name="Image"):
@@ -18,11 +18,20 @@ class VideoCapture:
         return self._img
 
     def show(self):
-        img = self._img
-        cv2.imshow(self._frame_name, img)
+        cv2.imshow(self._frame_name, self._img)
         cv2.waitKey(1)
 
     def close(self) -> Optional[bool]:
         if cv2.getWindowProperty(self._frame_name, cv2.WND_PROP_VISIBLE) < 1:
             cv2.destroyWindow(self._frame_name)
             return True
+
+
+_instance: Optional[_VideoCapture] = None
+
+
+def get_instance(frame_name="Image"):
+    global _instance
+    if not _instance:
+        _instance = _VideoCapture(frame_name)
+    return _instance

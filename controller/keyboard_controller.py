@@ -1,14 +1,14 @@
 import time
+import controller.controller_module.video_record_module as video_rec
 
 from cvzone.HandTrackingModule import HandDetector
 from pynput import keyboard
 
 from config import constants
-from controller.controller_module.video_record_module import VideoCapture
 from view.component.button import Button
 
 keyboard = keyboard.Controller()
-video = VideoCapture()
+video = video_rec.get_instance()
 detector = HandDetector(detectionCon=1)
 button_list: list = []
 
