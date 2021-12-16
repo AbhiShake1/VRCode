@@ -30,6 +30,7 @@ class _VideoCapture:
 _instance: Optional[_VideoCapture] = None
 
 
+# singleton access
 def get_instance(frame_name="Image"):
     global _instance
     if not _instance:
